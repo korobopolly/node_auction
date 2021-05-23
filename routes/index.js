@@ -126,7 +126,7 @@ router.post('/good/:id/bid', isLoggedIn, async (req, res, next) => {
     if (new Date(good.createdAt).valueOf() + (24 * 60 * 60 * 1000) < new Date()) {
       return res.status(403).send('경매가 이미 종료되었습니다');
     }
-    if (good.Auctions[0]+1000 && good.Auctions[0].bid+1000 >= bid) {
+    if (good.Auctions[0]+1000 && good.Auctions[0].bid+999 >= bid) {
       return res.status(403).send('이전 입찰가보다 1000원 이상 높아야 합니다');
     }
     const result = await Auction.create({
